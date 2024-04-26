@@ -11,7 +11,7 @@ public class MovementComponent : MonoBehaviour
     [SerializeField] private float minX = -14f;
     [SerializeField] private float maxZ = 7.2f;
     [SerializeField] private float minZ = -7.7f;
-    [SerializeField] private float movementSpeed = 7f;
+    public float movementSpeed = 7f;
     [SerializeField] private bool rotate = false;
     [SerializeField] private float rotateSpeed = 5f;
     [SerializeField] private Vector3 rotateDirection;
@@ -120,6 +120,15 @@ public class MovementComponent : MonoBehaviour
     }
     private void RotateBody() {
         transform.Rotate(rotateDirection * rotateSpeed * Time.deltaTime);
+    }
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("Player")){
+            HealthComponent health = other.GetComponent<HealthComponent>();
+            if (health != null) {
+                health.TakeDamage(1);
+            }
+            RandomizeMovementDirection();
+        }
     }
     private void Awake() {
         target = GameObject.Find("Player");

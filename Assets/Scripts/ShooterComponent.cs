@@ -7,20 +7,26 @@ public class ShooterComponent : MonoBehaviour {
     [SerializeField] private GameObject bulletPreFab;
     private GameObject target;
 
-    [SerializeField] private float fireRate = 0.5f;
+    public float fireRate = 0.5f;
     private float fireCooldown = 0f;
+    public int bulletLevel  = 1;
 
     public void ShootBullet() {
-
-        fireCooldown -= Time.deltaTime;
 
         if (fireCooldown <= 0f) {
             Vector3 position = transform.position;
             Quaternion rotation = transform.rotation;
-
-            GameObject bullet = Instantiate(bulletPreFab, position, rotation);
-            bullet.GetComponent<Bullet>().parent = gameObject;
-            bullet.GetComponent<Bullet>().parentTag = tag;
+            int bulletAmnt = bulletLevel;
+            bulletAmnt = Mathf.Clamp(bulletAmnt, 1, 3);
+            for (var i = 0; i < bulletAmnt; i++) {
+                Vector3 newPos = position; 
+                float sep = 0.8f;
+                float width = sep * bulletAmnt;
+                newPos.x = position.x - width / 2 + sep * i;
+                GameObject bullet = Instantiate(bulletPreFab, newPos, rotation);
+                bullet.GetComponent<Bullet>().bulletLevel = bulletLevel;
+            }
+            
             fireCooldown = fireRate;
         }
 
@@ -50,6 +56,7 @@ public class ShooterComponent : MonoBehaviour {
     }
     // Update is called once per frame
     void Update() {
+        if (fireCooldown > 0) fireCooldown -= Time.deltaTime;
         if (!playerControlled) {
             ShootBullet();
         }

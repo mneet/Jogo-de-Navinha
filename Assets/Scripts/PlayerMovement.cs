@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float minZ;
 
 
-    [SerializeField] private float moveSpeed = 8f;
+    public float moveSpeed = 8f;
 
     private void HandleMovement() {
 
