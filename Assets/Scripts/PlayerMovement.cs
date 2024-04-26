@@ -28,10 +28,10 @@ public class PlayerMovement : MonoBehaviour
         position += movementVec * moveSpeed * Time.deltaTime;
 
         // Limitar movimento dentro da camera
-        float xMinLimit = cameraTransform.position.x + minX;
-        float xMaxLimit = cameraTransform.position.x + maxX;
-        float zMinLimit = cameraTransform.position.z + minZ;
-        float zMaxLimit = cameraTransform.position.z + maxZ;
+        float xMinLimit = minX;
+        float xMaxLimit = maxX;
+        float zMinLimit = minZ;
+        float zMaxLimit = maxZ;
 
         position.x = Mathf.Clamp(position.x, xMinLimit, xMaxLimit);
         position.z = Mathf.Clamp(position.z, zMinLimit, zMaxLimit);
