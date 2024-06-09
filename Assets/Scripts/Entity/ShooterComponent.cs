@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShooterComponent : MonoBehaviour {
@@ -13,37 +14,50 @@ public class ShooterComponent : MonoBehaviour {
 
     public void ShootBullet() {
 
+        // Se cooldown estiver zerado
         if (fireCooldown <= 0f) {
+
+            // Coleta posição e rotação do objeto
             Vector3 position = transform.position;
             Quaternion rotation = transform.rotation;
+
+            // Define quantidade de projeteis com base no level 
             int bulletAmnt = bulletLevel;
+
+            // Limita a quantidade de projeteis dentro de um range
             bulletAmnt = Mathf.Clamp(bulletAmnt, 1, 3);
+
+            // Loop de repetição com base na quantidade de projeteis
             for (var i = 0; i < bulletAmnt; i++) {
+
+                // Nova variavel de posição
                 Vector3 newPos = position; 
+
+                // Separação entre os projeteis
                 float sep = 0.8f;
+                // Tamanho horizontal dos projetos alinhados
                 float width = sep * bulletAmnt;
+
+                // Posição do projeto sendo instanciado
                 newPos.x = position.x - width / 2 + sep * i;
+
+                // Intancia projetil  e define level do mesmo
                 GameObject bullet = Instantiate(bulletPreFab, newPos, rotation);
                 bullet.GetComponent<Bullet>().bulletLevel = bulletLevel;
+
+                // Rotaciona projetil com base no objeto que o criou
+                bullet.GetComponent<Bullet>().direction = transform.forward;
             }
             
+            // Reseta o cooldown
             fireCooldown = fireRate;
         }
 
     }
-    public void SetBulletDirection(GameObject bullet) {
-
-        Vector2 parentDirection = gameObject.GetComponent<MovementComponent>().movementDirectionVector;
-        Vector3 newDirection = new Vector3(parentDirection.x, 0, parentDirection.y);
-        bullet.GetComponent<Bullet>().direction = newDirection;
-
-        Quaternion rotation = Quaternion.LookRotation(newDirection, Vector3.up);
-        bullet.transform.rotation = rotation;
-
-    }
 
     public void PlayerShooterControl() {
-        if (Input.GetKey(KeyCode.Space)) {
+        // Coleta input e executa metodo
+        if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) {
             ShootBullet();
         }
     }

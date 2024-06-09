@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
+
 public class GameManager : MonoBehaviour
 {
+
+    public static GameManager Instance;
     [SerializeField] private int score = 0;
-    [SerializeField] private GameObject ShooterEnemy;
-    [SerializeField] private GameObject RunnerEnemy;
 
     [SerializeField] private GameObject healPWRUP;
     [SerializeField] private GameObject bulletPWRUP;
@@ -36,23 +38,10 @@ public class GameManager : MonoBehaviour
     public void ScorePoint(int point) {
         if (!gameEnded) {
             score += point;
-            if (score % levelCap == 0) {
-                GameObject enemySpawn = ShooterEnemy;
-                int dice = Random.Range(0, 100);
-                if (dice > 40) enemySpawn = RunnerEnemy;
-
-                Instantiate(enemySpawn, Vector3.zero, Quaternion.identity);
-                levelCap *= 2;
-            }
             scoreText.text = $"Pontos: {score}";
 
             if (score >= 80) {
-                gameHUD.SetActive(false);
-                gameEnded = true;
-                endGameUI.SetActive(true);
-                victoryText.SetActive(true);
-                Time.timeScale = 0f;
-                endScoreText.text = $"Pontuação: {score}";
+                EndGameVictory();
             }
         }
     }
@@ -69,14 +58,29 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void RestartGame() {
-        Debug.Log("Restarting game");
-        SceneManager.LoadScene(0);
-        Time.timeScale = 1f;
+    public void EndGameVictory() {
+        gameHUD.SetActive(false);
+        gameEnded = true;
+        endGameUI.SetActive(true);
+        victoryText.SetActive(true);
+        Time.timeScale = 0f;
+        endScoreText.text = $"Pontuação: {score}";
     }
 
+    public void RestartGame() {
+        Debug.Log("Restarting game");
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
+        WaveManager.Instance.waveCount = 0;
+        
+    }
 
     private void Awake() {
-
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+        }
+        else {
+            Instance = this;
+        }
     }
 }

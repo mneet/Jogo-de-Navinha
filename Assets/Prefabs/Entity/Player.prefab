@@ -65,7 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerControlled: 1
   bulletPreFab: {fileID: 5395158556580339885, guid: 0e5fb9615a98a744f9cefe0ad21f624b, type: 3}
-  fireRate: 0.5
+  fireRate: 0.25
   bulletLevel: 1
 --- !u!114 &3632928151695927401
 MonoBehaviour:
@@ -84,6 +84,9 @@ MonoBehaviour:
   minX: -14
   maxZ: 7.2
   minZ: -7.2
+  mouseLayer:
+    serializedVersion: 2
+    m_Bits: 256
   moveSpeed: 10
 --- !u!54 &4014933106979336266
 Rigidbody:

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6582960133303196332}
   - component: {fileID: 2297072680309609210}
   - component: {fileID: 7898045923670704295}
-  - component: {fileID: 377562155711379958}
   - component: {fileID: 978649450142674192}
   - component: {fileID: 920437320426522042}
   m_Layer: 0
@@ -67,29 +66,12 @@ MonoBehaviour:
   minX: -14
   maxZ: 7.2
   minZ: -7.7
-  movementSpeed: 9
+  movementSpeed: 5
   rotate: 1
   rotateSpeed: 200
   rotateDirection: {x: 0, y: 1, z: 0}
-  movementBehaviour: 0
   movementDirection: 0
   movementDirectionVector: {x: 0, y: 0}
---- !u!114 &377562155711379958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6798739349342710964}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24519187fb1bc0b4ca6c9a1fc5480904, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerControlled: 0
-  bulletPreFab: {fileID: 4238151249580601340, guid: 30dc627aa8346dc46a0a98a5f0448fde, type: 3}
-  fireRate: 1.5
-  bulletLevel: 0
 --- !u!54 &978649450142674192
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -49,9 +49,9 @@ MonoBehaviour:
   targetTag: Enemy
   fragmentPreFab: {fileID: 286697756653730348, guid: 27011bfe630c3d4418386f22e736d834, type: 3}
   bulletLevel: 1
-  speed: 15
+  speed: 30
   direction: {x: 0, y: 0, z: 1}
-  damage: 2
+  damage: 1
 --- !u!65 &6129128114242891382
 BoxCollider:
   m_ObjectHideFlags: 0
