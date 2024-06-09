@@ -52,18 +52,18 @@ public class MovementComponent : MonoBehaviour
         switch (movementDirection) {
             case MovementDirection.RIGHT:
                 movementDirectionVector.x = 1;
-                newPosition.x = UnityEngine.Random.Range(minX - 4, minX);
-                newPosition.y = UnityEngine.Random.Range(minZ + 4, maxZ - 4);
+                newPosition.x = UnityEngine.Random.Range(minX - 2, minX);
+                newPosition.y = UnityEngine.Random.Range(minZ + 2, maxZ - 2);
                 break;
             case MovementDirection.LEFT:
                 movementDirectionVector.x = -1;
-                newPosition.x = UnityEngine.Random.Range(maxX, maxX + 4);
-                newPosition.y = UnityEngine.Random.Range(minZ + 4, maxZ - 4);
+                newPosition.x = UnityEngine.Random.Range(maxX, maxX + 2);
+                newPosition.y = UnityEngine.Random.Range(minZ + 2, maxZ - 2);
                 break;
             case MovementDirection.DOWN:
                 movementDirectionVector.y = -1;
-                newPosition.x = UnityEngine.Random.Range(minX + 4, maxX - 4);
-                newPosition.y = UnityEngine.Random.Range(maxZ, maxZ + 4);
+                newPosition.x = UnityEngine.Random.Range(minX + 2, maxX - 2);
+                newPosition.y = UnityEngine.Random.Range(maxZ, maxZ + 2);
                 break;
         }
         
