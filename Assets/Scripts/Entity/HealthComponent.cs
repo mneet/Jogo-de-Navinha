@@ -7,8 +7,8 @@ public class HealthComponent : MonoBehaviour
 {
     public float health = 10f;
     [SerializeField] private bool immortal = false;
-    [SerializeField] private ParticleSystem hitParticles;
-    private ParticleSystem particleSys;
+    [SerializeField] private GameObject hitParticles;
+    private EntityParticle particleSys;
    
     private GameManager gameManager;
     private bool isPlayer;
@@ -23,6 +23,8 @@ public class HealthComponent : MonoBehaviour
 
         // Se for o player, atualiza a UI
         if (isPlayer) gameManager.UpdateHealthUI((int)health);
+
+        particleSys.playParticle();
 
         // Se vida for igual ou menor a 0 e o objeto não for imortal
         if (health <= 0 && !immortal) {
@@ -40,9 +42,14 @@ public class HealthComponent : MonoBehaviour
                 WaveManager.Instance.CheckWaveList(gameObject);
 
                 Destroy(gameObject);
+
+                particleSys.destroyFlag = true;
+
+                gameObject.GetComponent<AsteroidComponent>().DestroyAsteroid();
             }
             else { // SE for player, apenas destroi o objeto          
-                Destroy(gameObject);             
+                Destroy(gameObject);
+                particleSys.destroyFlag = true;
             }
         }
         
@@ -60,7 +67,12 @@ public class HealthComponent : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         isPlayer = CompareTag("Player");
 
-        
+    }
+
+    private void Start()
+    {
+        particleSys = Instantiate(hitParticles, transform.position, Quaternion.identity).GetComponent<EntityParticle>();
+        particleSys.parent = gameObject;
     }
 
     // Update is called once per frame

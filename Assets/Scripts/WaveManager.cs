@@ -32,7 +32,7 @@ public class WaveManager : MonoBehaviour {
             waveRunning = true;
         }
     }
-    private Wave currentWave;
+    public Wave currentWave;
 
     #region Generation Methods
 

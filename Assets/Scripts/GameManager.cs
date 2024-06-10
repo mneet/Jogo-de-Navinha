@@ -39,10 +39,6 @@ public class GameManager : MonoBehaviour
         if (!gameEnded) {
             score += point;
             scoreText.text = $"Pontos: {score}";
-
-            if (score >= 80) {
-                EndGameVictory();
-            }
         }
     }
 

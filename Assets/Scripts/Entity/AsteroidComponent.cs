@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class AsteroidComponent : MonoBehaviour
@@ -8,15 +9,16 @@ public class AsteroidComponent : MonoBehaviour
     [SerializeField] GameObject asteroidToSpawn = null;
     [SerializeField] int asteroidAmount = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    public void DestroyAsteroid()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (asteroidToSpawn != null && asteroidAmount > 0)
+        {
+            for (int i = 0; i < asteroidAmount; i++)
+            {
+                GameObject asteroid = Instantiate(asteroidToSpawn, transform.position, Quaternion.identity);
+                asteroid.transform.position = transform.position;
+                //MovementComponent asteroidMovement = asteroid.GetComponent<MovementComponent>();
+            }
+        }
     }
 }

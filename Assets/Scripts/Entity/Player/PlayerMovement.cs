@@ -33,25 +33,20 @@ public class PlayerMovement : MonoBehaviour
         // Aplicando movimento
         position += movementVec * moveSpeed * Time.deltaTime;
 
-        // Limitar movimento dentro da camera
-        float xMinLimit = minX;
-        float xMaxLimit = maxX;
-        float zMinLimit = minZ;
-        float zMaxLimit = maxZ;
 
         // Teleporte limite movimento horizontal
-        if (position.x < xMinLimit - 3) {
-            position.x = xMaxLimit + 2;
-        } else if (position.x > xMaxLimit + 3) {
-            position.x = xMinLimit - 2;
+        if (position.x < minX - 3) {
+            position.x = maxX + 2;
+        } else if (position.x > maxX + 3) {
+            position.x = minX - 2;
         }
 
         // Teleporte limite movimento vertical
-        if (position.z < zMinLimit - 3) {
-            position.z = zMaxLimit + 2;
+        if (position.z < minZ - 3) {
+            position.z = maxZ + 2;
         }
-        else if (position.z > zMaxLimit + 3) {
-            position.z = zMinLimit - 2;
+        else if (position.z > maxZ + 3) {
+            position.z = minZ - 2;
         }
 
         // Aplicando posição ao objeto
