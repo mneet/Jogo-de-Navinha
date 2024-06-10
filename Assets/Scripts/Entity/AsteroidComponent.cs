@@ -17,6 +17,8 @@ public class AsteroidComponent : MonoBehaviour
             {
                 GameObject asteroid = Instantiate(asteroidToSpawn, transform.position, Quaternion.identity);
                 asteroid.transform.position = transform.position;
+
+                WaveManager.Instance.currentWave.mobObjList.Add(asteroid);
                 //MovementComponent asteroidMovement = asteroid.GetComponent<MovementComponent>();
             }
         }
