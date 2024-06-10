@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   immortal: 0
+  hitParticles: {fileID: 4252719395776242063, guid: cc5d5ecb0c9acff489c84d9c217c674d, type: 3}
 --- !u!114 &1677906896744246690
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,15 +5,17 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 public class HealthComponent : MonoBehaviour
 {
-    [SerializeField] private float health = 10f;
+    public float health = 10f;
     [SerializeField] private bool immortal = false;
- 
+    [SerializeField] private ParticleSystem hitParticles;
+    private ParticleSystem particleSys;
    
     private GameManager gameManager;
     private bool isPlayer;
 
     // Aplica dano ao objeto
     public void TakeDamage(float damage) {
+
         health -= damage;
         
         // Limita valor da vida
@@ -57,6 +59,8 @@ public class HealthComponent : MonoBehaviour
     private void Awake() {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         isPlayer = CompareTag("Player");
+
+        
     }
 
     // Update is called once per frame

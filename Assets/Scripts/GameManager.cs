@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameHUD;
     [SerializeField] private TMP_Text endScoreText;
     [SerializeField] private TMP_Text scoreText;
-    [SerializeField] private TMP_Text hpText;
+    [SerializeField] private Slider hpBar;
     [SerializeField] private GameObject victoryText;
     [SerializeField] private GameObject lossText;
     public bool gameEnded = false;
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void UpdateHealthUI(int health) {
-        hpText.text = $"Vida: {health}";
+        hpBar.value = ((float)health / 100f) * 10f;
         if (health <= 0) {
             endGameUI.SetActive(true);
             endScoreText.text = $"Pontuação: {score}";
