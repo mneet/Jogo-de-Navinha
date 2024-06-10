@@ -20,14 +20,22 @@ public class WaveManager : MonoBehaviour {
     [SerializeField] private List<GameObject> EnemiesList;
 
     // Wave
+
+    public enum AsteroidTypes {
+        SMALL = 0,
+        MEDIUM = 1,
+        BIG = 2,
+        LENGTH = 3
+    }
+
     public struct Wave {
         public bool waveSpawned;
-        public List<GameObject> mobList;
+        public List<AsteroidTypes> mobList;
         public List<GameObject> mobObjList;
         public bool waveRunning;
 
         public void InitVariables() {
-            mobList = new List<GameObject>();
+            mobList = new List<AsteroidTypes>();
             waveSpawned = false;
             waveRunning = true;
         }
@@ -45,7 +53,7 @@ public class WaveManager : MonoBehaviour {
 
         for (var i = 0; i < waveMobAmount[waveCount]; i++) {
 
-            GameObject mob = PickRandomList(EnemiesList);
+            AsteroidTypes mob = (AsteroidTypes)UnityEngine.Random.Range(0, (int)AsteroidTypes.LENGTH);
             wave.mobList.Add(mob);
         }
 
@@ -69,7 +77,9 @@ public class WaveManager : MonoBehaviour {
         if (!currentWave.waveSpawned) {
             currentWave.waveSpawned = true;
             for (var i = 0; i < currentWave.mobList.Count(); i++) {
-                GameObject mob = Instantiate(currentWave.mobList[i], transform.position, Quaternion.identity);
+                GameObject mob = GameManager.Instance.GetRandomEnemy(currentWave.mobList[i]);
+                mob.SetActive(true);
+
                 mobObjList.Add(mob);
             }
         }

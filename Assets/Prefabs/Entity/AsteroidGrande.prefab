@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scorePoints: 0
-  asteroidToSpawn: {fileID: 6798739349342710964, guid: 832266b5d2514ff4a908ae2a21581ff4, type: 3}
+  asteroidToSpawn: 1
   asteroidAmount: 2
 --- !u!114 &2297072680309609210
 MonoBehaviour:
@@ -65,6 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  healthMax: 10
   immortal: 0
   hitParticles: {fileID: 557219510723164364, guid: 6974c18403e5a6f4cadf41078fafb74f, type: 3}
 --- !u!114 &7898045923670704295

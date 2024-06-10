@@ -14,16 +14,14 @@ public class EntityParticle : MonoBehaviour
 
     private void checkFlag()
     {
-        if (destroyFlag && !gameObject.GetComponent<ParticleSystem>().isPlaying)
+        if (!gameObject.GetComponent<ParticleSystem>().isPlaying)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
     private void Update()
     {
         checkFlag();
-
-        if (parent != null) transform.position = parent.transform.position;
     }
 }

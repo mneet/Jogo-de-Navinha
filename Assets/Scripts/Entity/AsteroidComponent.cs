@@ -6,7 +6,7 @@ using UnityEngine;
 public class AsteroidComponent : MonoBehaviour
 {
     [SerializeField] int scorePoints = 0;
-    [SerializeField] GameObject asteroidToSpawn = null;
+    [SerializeField] WaveManager.AsteroidTypes asteroidToSpawn;
     [SerializeField] int asteroidAmount = 0;
 
     public void DestroyAsteroid()
@@ -15,7 +15,8 @@ public class AsteroidComponent : MonoBehaviour
         {
             for (int i = 0; i < asteroidAmount; i++)
             {
-                GameObject asteroid = Instantiate(asteroidToSpawn, transform.position, Quaternion.identity);
+                GameObject asteroid = GameManager.Instance.GetRandomEnemy(asteroidToSpawn);
+                asteroid.SetActive(true);
                 asteroid.transform.position = transform.position;
 
                 WaveManager.Instance.currentWave.mobObjList.Add(asteroid);

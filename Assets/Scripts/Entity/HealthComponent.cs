@@ -6,6 +6,8 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class HealthComponent : MonoBehaviour
 {
     public float health = 10f;
+    public float healthMax = 10f;
+
     [SerializeField] private bool immortal = false;
     [SerializeField] private GameObject hitParticles;
     private EntityParticle particleSys;
@@ -24,13 +26,16 @@ public class HealthComponent : MonoBehaviour
         // Se for o player, atualiza a UI
         if (isPlayer) gameManager.UpdateHealthUI((int)health);
 
-        //particleSys.playParticle();
+        
 
         // Se vida for igual ou menor a 0 e o objeto não for imortal
         if (health <= 0 && !immortal) {
             // Se for um inimigo
             if (!isPlayer) {
-                
+
+                // Chama particulas
+                GameManager.Instance.PlayEnemieHitParticle(transform.position);
+
                 // Atualiza pontuação
                 gameManager.ScorePoint(1);
 
@@ -39,17 +44,14 @@ public class HealthComponent : MonoBehaviour
                 Vector3 pos = transform.position;
                 if (dice < 20) gameManager.SpawnPowerUp(pos);
 
-                WaveManager.Instance.CheckWaveList(gameObject);
-
                 gameObject.GetComponent<AsteroidComponent>().DestroyAsteroid();
-                //particleSys.destroyFlag = true;
-
-                Destroy(gameObject);
+                WaveManager.Instance.CheckWaveList(gameObject);
+                health = healthMax;
+                gameObject.SetActive(false);
                 
             }
-            else { // SE for player, apenas destroi o objeto          
+            else {       
                 Destroy(gameObject);
-               // particleSys.destroyFlag = true;
             }
         }
         
@@ -66,7 +68,7 @@ public class HealthComponent : MonoBehaviour
     private void Awake() {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         isPlayer = CompareTag("Player");
-
+        healthMax = health;
     }
 
     private void Start()

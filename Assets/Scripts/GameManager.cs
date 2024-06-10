@@ -12,6 +12,12 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     [SerializeField] private int score = 0;
 
+    public PoolManager EnemyParticlePool;
+    public PoolManager SmallAsteroidPool;
+    public PoolManager MediumAsteroidPool;
+    public PoolManager BigAsteroidPool;
+
+
     [SerializeField] private GameObject healPWRUP;
     [SerializeField] private GameObject bulletPWRUP;
     [SerializeField] private GameObject firePWRUP;
@@ -35,13 +41,31 @@ public class GameManager : MonoBehaviour
         else if (dice < 60) Instantiate(speedPWRUP, position, Quaternion.identity);
         else Instantiate(healPWRUP, position, Quaternion.identity);
     }
+    public GameObject GetRandomEnemy(WaveManager.AsteroidTypes asteroidType) {
+
+        GameObject obj = SmallAsteroidPool.GetPoolObject();
+
+        switch (asteroidType) {
+            case WaveManager.AsteroidTypes.SMALL: obj = SmallAsteroidPool.GetPoolObject(); break;
+            case WaveManager.AsteroidTypes.MEDIUM: obj = MediumAsteroidPool.GetPoolObject(); break;
+            case WaveManager.AsteroidTypes.BIG: obj = BigAsteroidPool.GetPoolObject(); break;
+        }
+
+        return obj;
+    }
+    public void PlayEnemieHitParticle(Vector3 position) {
+        GameObject ptSys = EnemyParticlePool.GetPoolObject();
+        ptSys.SetActive(true);
+        ptSys.transform.position = position;
+        ptSys.GetComponent<ParticleSystem>().Play();
+    }
+    
     public void ScorePoint(int point) {
         if (!gameEnded) {
             score += point;
             scoreText.text = $"Pontos: {score}";
         }
     }
-
     public void UpdateHealthUI(int health) {
         hpBar.value = ((float)health / 100f) * 10f;
         if (health <= 0) {
@@ -53,7 +77,6 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0f;
         }
     }
-
     public void EndGameVictory() {
         gameHUD.SetActive(false);
         gameEnded = true;
@@ -62,7 +85,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         endScoreText.text = $"Pontuação: {score}";
     }
-
     public void RestartGame() {
         Debug.Log("Restarting game");
         Time.timeScale = 1f;
