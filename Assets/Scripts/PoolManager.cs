@@ -26,9 +26,10 @@ public class PoolManager : MonoBehaviour
             }
         }
 
+        Debug.Log("Pos foreach");
         GameObject newObj = Instantiate(preFab);
-        newObj.SetActive(true);
         objectPool.Add(newObj);
+
         return newObj;
     }
 }

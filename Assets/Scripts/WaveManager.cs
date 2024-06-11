@@ -48,15 +48,13 @@ public class WaveManager : MonoBehaviour {
     private Wave WaveGenerator() {
         Wave wave = new Wave();
         wave.InitVariables();
-
-        waveCount++;
-
+        
         for (var i = 0; i < waveMobAmount[waveCount]; i++) {
-
+            
             AsteroidTypes mob = (AsteroidTypes)UnityEngine.Random.Range(0, (int)AsteroidTypes.LENGTH);
             wave.mobList.Add(mob);
         }
-
+        waveCount++;
         return wave;
     }
 
@@ -79,7 +77,7 @@ public class WaveManager : MonoBehaviour {
             for (var i = 0; i < currentWave.mobList.Count(); i++) {
                 GameObject mob = GameManager.Instance.GetRandomEnemy(currentWave.mobList[i]);
                 mob.SetActive(true);
-
+                mob.GetComponent<MovementComponent>().RandomizeDirection();
                 mobObjList.Add(mob);
             }
         }
@@ -130,7 +128,7 @@ public class WaveManager : MonoBehaviour {
     private void Start() {
         currentWave = WaveGenerator();
     }
-    void Update() {
+    private void Update() {
         WaveControl();
     }
 }

@@ -9,12 +9,13 @@ public class EntityParticle : MonoBehaviour
 
     public void playParticle()
     {
+        Debug.Log("Playing");
         gameObject.GetComponent<ParticleSystem>().Play();
     }
 
     private void checkFlag()
     {
-        if (!gameObject.GetComponent<ParticleSystem>().isPlaying)
+        if (!gameObject.GetComponent<ParticleSystem>().isPlaying && parent == null)
         {
             gameObject.SetActive(false);
         }
@@ -23,5 +24,8 @@ public class EntityParticle : MonoBehaviour
     private void Update()
     {
         checkFlag();
+        if (parent != null) {
+            transform.position = parent.transform.position;
+        }
     }
 }

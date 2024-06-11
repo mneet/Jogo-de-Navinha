@@ -50,16 +50,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2474010159240235619, guid: 8bc91342867262b409f10c8614f288d5, type: 3}
       propertyPath: m_Name
-      value: SpeedPowerUP
+      value: ShieldPowerup
       objectReference: {fileID: 0}
     - target: {fileID: 3861355063170819835, guid: 8bc91342867262b409f10c8614f288d5, type: 3}
       propertyPath: power
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 3861355063170819835, guid: 8bc91342867262b409f10c8614f288d5, type: 3}
+      propertyPath: Shield
+      value: 
+      objectReference: {fileID: 6675474816025915734, guid: 128facecc88e20e46b167b0062fb4e75, type: 3}
     - target: {fileID: 5607534882188241301, guid: 8bc91342867262b409f10c8614f288d5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 228387c40b3ca5144bc84a67a120530d, type: 2}
+      objectReference: {fileID: 2100000, guid: 6371c0d4fa6960b4a8043aef1fe681d6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

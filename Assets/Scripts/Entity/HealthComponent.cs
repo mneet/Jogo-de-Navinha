@@ -14,6 +14,8 @@ public class HealthComponent : MonoBehaviour
    
     private GameManager gameManager;
     private bool isPlayer;
+    private bool shieldActive = false;
+    private HealthComponent parent;
 
     // Aplica dano ao objeto
     public void TakeDamage(float damage) {
@@ -24,9 +26,10 @@ public class HealthComponent : MonoBehaviour
         health = Mathf.Clamp(health, 0, health);
 
         // Se for o player, atualiza a UI
-        if (isPlayer) gameManager.UpdateHealthUI((int)health);
-
-        
+        if (isPlayer && !gameObject.CompareTag("PlayerShield")) {
+            gameManager.UpdateHealthUI((int)health);
+            particleSys.playParticle();
+        }
 
         // Se vida for igual ou menor a 0 e o objeto não for imortal
         if (health <= 0 && !immortal) {
@@ -52,6 +55,12 @@ public class HealthComponent : MonoBehaviour
             }
             else {       
                 Destroy(gameObject);
+                if (parent != null) {
+                    parent.shieldActive = false;
+                }
+                else {
+                    particleSys.destroyFlag = true;
+                }              
             }
         }
         
@@ -65,20 +74,29 @@ public class HealthComponent : MonoBehaviour
         if (isPlayer) gameManager.UpdateHealthUI((int)health);
     }
 
+    public void CreateShield(GameObject shield) {
+        if (!shieldActive) {
+            GameObject shieldObj = Instantiate(shield, this.transform);
+            shieldObj.GetComponent<HealthComponent>().parent = this;
+        }
+    }
+
     private void Awake() {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        isPlayer = CompareTag("Player");
+        isPlayer = CompareTag("Player") || CompareTag("PlayerShield");
         healthMax = health;
+
+
+        Debug.Log("Object created");
     }
 
     private void Start()
     {
-        //particleSys = Instantiate(hitParticles, transform.position, Quaternion.identity).GetComponent<EntityParticle>();
-        //particleSys.parent = gameObject;
-    }
-
-    // Update is called once per frame
-    void Update() {
-
+        if (isPlayer && parent == null) {
+            GameObject ptSys = Instantiate(hitParticles, transform.position, Quaternion.identity);
+            particleSys = ptSys.GetComponent<EntityParticle>();
+            particleSys.parent = gameObject;
+            ptSys.SetActive(true);
+        }
     }
 }

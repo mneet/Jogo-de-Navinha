@@ -13,6 +13,7 @@ public class AsteroidComponent : MonoBehaviour
     {
         if (asteroidToSpawn != null && asteroidAmount > 0)
         {
+
             for (int i = 0; i < asteroidAmount; i++)
             {
                 GameObject asteroid = GameManager.Instance.GetRandomEnemy(asteroidToSpawn);

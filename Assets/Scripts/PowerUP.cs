@@ -8,11 +8,13 @@ public class PowerUP : MonoBehaviour {
         HEAL,
         BULLET,
         FIRE,
-        SPEED
+        SPEED,
+        SHIELD
     }
     [SerializeField] private Powers power;
     [SerializeField] private float heal;
     [SerializeField] private float timerTotal;
+    [SerializeField] private GameObject Shield;
     private float currentTimer;
 
     private void OnTriggerEnter(Collider other) {
@@ -23,6 +25,8 @@ public class PowerUP : MonoBehaviour {
                 case Powers.FIRE: UpgradeFire(other.gameObject); break;
                 case Powers.BULLET: UpgradeBullet(other.gameObject);break;
                 case Powers.SPEED: UpgradeSpeed(other.gameObject); break;
+                case Powers.SHIELD: UpgradeShield(other.gameObject); break;
+                    
             }
             Destroy(gameObject);
         }
@@ -32,6 +36,9 @@ public class PowerUP : MonoBehaviour {
         PlayerMovement movement = other.GetComponent<PlayerMovement>();
         movement.moveSpeed += 1f;
         movement.moveSpeed = Mathf.Clamp(movement.moveSpeed, 8f, 11f);
+    }
+    private void UpgradeShield(GameObject other) {
+        other.GetComponent<HealthComponent>().CreateShield(Shield);
     }
     private void Heal(GameObject other) {
         other.GetComponent<HealthComponent>().TakeHeal(heal);

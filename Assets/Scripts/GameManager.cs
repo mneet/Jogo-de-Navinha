@@ -18,10 +18,7 @@ public class GameManager : MonoBehaviour
     public PoolManager BigAsteroidPool;
 
 
-    [SerializeField] private GameObject healPWRUP;
-    [SerializeField] private GameObject bulletPWRUP;
-    [SerializeField] private GameObject firePWRUP;
-    [SerializeField] private GameObject speedPWRUP;
+    [SerializeField] private List<GameObject> powerUpList;
 
     [SerializeField] private int levelCap = 10;
 
@@ -35,20 +32,24 @@ public class GameManager : MonoBehaviour
     public bool gameEnded = false;
 
     public void SpawnPowerUp(Vector3 position) {
-        int dice = Random.Range(0, 100);
-        if (dice < 20) Instantiate(bulletPWRUP, position, Quaternion.identity);
-        else if (dice < 40) Instantiate(firePWRUP, position, Quaternion.identity);
-        else if (dice < 60) Instantiate(speedPWRUP, position, Quaternion.identity);
-        else Instantiate(healPWRUP, position, Quaternion.identity);
+        GameObject powerUp = powerUpList[Random.Range(0, powerUpList.Count)];
+
+        Instantiate(powerUp, position, Quaternion.identity);
     }
     public GameObject GetRandomEnemy(WaveManager.AsteroidTypes asteroidType) {
 
-        GameObject obj = SmallAsteroidPool.GetPoolObject();
+        GameObject obj = null;
 
         switch (asteroidType) {
-            case WaveManager.AsteroidTypes.SMALL: obj = SmallAsteroidPool.GetPoolObject(); break;
-            case WaveManager.AsteroidTypes.MEDIUM: obj = MediumAsteroidPool.GetPoolObject(); break;
-            case WaveManager.AsteroidTypes.BIG: obj = BigAsteroidPool.GetPoolObject(); break;
+            case WaveManager.AsteroidTypes.SMALL: 
+                obj = SmallAsteroidPool.GetPoolObject(); 
+                break;
+            case WaveManager.AsteroidTypes.MEDIUM: 
+                obj = MediumAsteroidPool.GetPoolObject(); 
+                break;
+            case WaveManager.AsteroidTypes.BIG: 
+                obj = BigAsteroidPool.GetPoolObject(); 
+                break;
         }
 
         return obj;

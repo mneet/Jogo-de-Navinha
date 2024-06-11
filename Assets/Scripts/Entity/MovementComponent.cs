@@ -38,7 +38,7 @@ public class MovementComponent : MonoBehaviour
     }
 
     // Define direção de movimento aleatoria para o objeto
-    private void RandomizeDirection() {
+    public void RandomizeDirection() {
 
         // Chama metodo para gerar direção aleatoria
         movementDirection = GetRandomDirection();
@@ -106,7 +106,7 @@ public class MovementComponent : MonoBehaviour
    
     // Checa por colisão do Player com o objeto
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("Player")){
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("PlayerShield")){
             // Caso tenha colidido, aplica dano ao Player
             HealthComponent health = other.GetComponent<HealthComponent>();
             if (health != null) {

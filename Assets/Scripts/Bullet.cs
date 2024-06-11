@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour {
     // Checa por colisão com alvo
     private void OnTriggerEnter(Collider other) {
         // Caso colida com o alvo
-        if (other.gameObject.CompareTag(targetTag)) {
+        if (other.gameObject.CompareTag(targetTag) || (targetTag == "Player" && other.gameObject.CompareTag("PlayerShield"))) {
             // Aplica dano
             HealthComponent health = other.GetComponent<HealthComponent>();
             if (health != null) {
