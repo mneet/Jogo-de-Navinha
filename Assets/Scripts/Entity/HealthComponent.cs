@@ -26,7 +26,7 @@ public class HealthComponent : MonoBehaviour
         health = Mathf.Clamp(health, 0, health);
 
         // Se for o player, atualiza a UI
-        if (isPlayer && !gameObject.CompareTag("PlayerShield")) {
+        if (isPlayer && CompareTag("Player")) {
             gameManager.UpdateHealthUI((int)health);
             particleSys.playParticle();
         }
