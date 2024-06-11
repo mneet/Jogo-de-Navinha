@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public PoolManager SmallAsteroidPool;
     public PoolManager MediumAsteroidPool;
     public PoolManager BigAsteroidPool;
+    public PoolManager ShooterPool;
 
 
     [SerializeField] private List<GameObject> powerUpList;
@@ -49,6 +50,9 @@ public class GameManager : MonoBehaviour
                 break;
             case WaveManager.AsteroidTypes.BIG: 
                 obj = BigAsteroidPool.GetPoolObject(); 
+                break;
+            case WaveManager.AsteroidTypes.SHOOTER:
+                obj = ShooterPool.GetPoolObject();
                 break;
         }
 

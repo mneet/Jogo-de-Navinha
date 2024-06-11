@@ -25,7 +25,8 @@ public class WaveManager : MonoBehaviour {
         SMALL = 0,
         MEDIUM = 1,
         BIG = 2,
-        LENGTH = 3
+        SHOOTER = 3,
+        LENGTH = 4
     }
 
     public struct Wave {
