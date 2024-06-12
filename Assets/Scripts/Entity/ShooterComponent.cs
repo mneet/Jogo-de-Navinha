@@ -48,7 +48,10 @@ public class ShooterComponent : MonoBehaviour {
                 // Rotaciona projetil com base no objeto que o criou
                 bullet.GetComponent<Bullet>().direction = transform.forward;
             }
-            
+
+            // Audio de tiro
+            AudioController.Instance.PlaySfx(0);
+
             // Reseta o cooldown
             fireCooldown = fireRate;
         }

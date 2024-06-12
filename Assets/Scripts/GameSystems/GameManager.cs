@@ -63,8 +63,7 @@ public class GameManager : MonoBehaviour
         ptSys.SetActive(true);
         ptSys.transform.position = position;
         ptSys.GetComponent<ParticleSystem>().Play();
-    }
-    
+    }   
     public void ScorePoint(int point) {
         if (!gameEnded) {
             score += point;
@@ -105,5 +104,10 @@ public class GameManager : MonoBehaviour
         else {
             Instance = this;
         }
+    }
+
+    private void Start() {
+        // Toca musica de background
+        AudioController.Instance.PlayBgMusic(0);
     }
 }

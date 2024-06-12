@@ -31,6 +31,9 @@ public class HealthComponent : MonoBehaviour
             particleSys.playParticle();
         }
 
+        // Audio de hit
+        AudioController.Instance.PlaySfx(1);
+
         // Se vida for igual ou menor a 0 e o objeto não for imortal
         if (health <= 0 && !immortal) {
             // Se for um inimigo
