@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    // Velocidade que a camera se move
     [SerializeField] private float moveSpeed = 1;
 
     private void LateUpdate() {

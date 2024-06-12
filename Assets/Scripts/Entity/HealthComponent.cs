@@ -5,16 +5,26 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 public class HealthComponent : MonoBehaviour
 {
+    // Vida atual e maxima
     public float health = 10f;
     public float healthMax = 10f;
 
+    // Quantidade de pontos ao ser destruido
+    public int scorePoints = 1;
+
     [SerializeField] private bool immortal = false;
+
+    // Sistema de particulas do Player
     [SerializeField] private GameObject hitParticles;
     private EntityParticle particleSys;
    
     private GameManager gameManager;
+
+    // Flags se é controlado pelo player e shield ativo
     private bool isPlayer;
     private bool shieldActive = false;
+
+    // Parent do shield
     private HealthComponent parent;
 
     // Aplica dano ao objeto
@@ -43,7 +53,7 @@ public class HealthComponent : MonoBehaviour
                 GameManager.Instance.PlayEnemieHitParticle(transform.position);
 
                 // Atualiza pontuação
-                gameManager.ScorePoint(1);
+                gameManager.ScorePoint(scorePoints);
 
                 // Dropa powerup caso o dado esteja dentro do range
                 int dice = Random.Range(0, 100);
@@ -77,7 +87,9 @@ public class HealthComponent : MonoBehaviour
         if (isPlayer) gameManager.UpdateHealthUI((int)health);
     }
 
+    // Cria shield em volta do player
     public void CreateShield(GameObject shield) {
+        // Checa se ja não existe um shield ativo
         if (!shieldActive) {
             GameObject shieldObj = Instantiate(shield, this.transform);
             shieldObj.GetComponent<HealthComponent>().parent = this;
@@ -95,6 +107,7 @@ public class HealthComponent : MonoBehaviour
 
     private void Start()
     {
+        // Instancia sistema de particulas apenas apra o player
         if (isPlayer && parent == null) {
             GameObject ptSys = Instantiate(hitParticles, transform.position, Quaternion.identity);
             particleSys = ptSys.GetComponent<EntityParticle>();

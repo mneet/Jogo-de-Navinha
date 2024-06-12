@@ -3,15 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour {
+
+    // Alvo
     [SerializeField] string targetTag;
+
+    // Prefab dos fragmentos
     [SerializeField] GameObject fragmentPreFab;
 
+    // Nível do projetil
     public int bulletLevel = 0;
+
+    // Velocidade de movimento
     public float speed = 15.0f;
+    // Direção 
     public Vector3 direction = Vector3.forward;
+
+    // Dano
     public float damage = 2f;
 
-    // Cehca se projetil saiu dos limites da tela
+    // Checa se projetil saiu dos limites da tela
     private void CheckOutOfScreen() {
         // Caso tenha saido dos limites, autodestroi
         if (transform.position.z < -30f || transform.position.z >  30f || transform.position.x < -30f || transform.position.x > 30f) {

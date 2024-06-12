@@ -6,9 +6,11 @@ public class AudioController : MonoBehaviour
 {
     public static AudioController Instance;
 
+    // Sistemas de sons
     [SerializeField] private AudioSource _bgMusicSrc;
     [SerializeField] private AudioSource _sfxSrc;
 
+    // Listas de sons
     [SerializeField] private AudioClip[] _bgMusics;
     [SerializeField] private AudioClip[] _sfxClips;
 

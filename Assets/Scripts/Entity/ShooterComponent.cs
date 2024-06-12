@@ -4,14 +4,24 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShooterComponent : MonoBehaviour {
+
+    // Flag de controlado pelo player
     [SerializeField] bool playerControlled = false;
+
+    // Prefab do projetil
     [SerializeField] private GameObject bulletPreFab;
+
+    // Alvo inimigo
     private GameObject target;
 
+    // Timers e cooldowns
     public float fireRate = 0.5f;
     private float fireCooldown = 0f;
+    
+    // Nível do projetil
     public int bulletLevel  = 1;
 
+    // Istancia projetil
     public void ShootBullet() {
 
         // Se cooldown estiver zerado
@@ -58,6 +68,7 @@ public class ShooterComponent : MonoBehaviour {
 
     }
 
+    // Tiro controlado pelo player
     public void PlayerShooterControl() {
         // Coleta input e executa metodo
         if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) {
@@ -66,18 +77,24 @@ public class ShooterComponent : MonoBehaviour {
     }
 
     private void Awake() {
+        // caso pertença a um inimigo
         if (!playerControlled) {
+            // Define o target como o player e cooldown de tiro aleatorio
             target = GameObject.Find("Player");
             fireCooldown = Random.Range(0, fireCooldown);
         }
     }
-    // Update is called once per frame
+
+        
     void Update() {
+        // Diminui cooldown de tiro
         if (fireCooldown > 0) fireCooldown -= Time.deltaTime;
-        if (!playerControlled) {
+
+        // Chama metodos de controle de tiro 
+        if (!playerControlled) { // Se não é controlado pelo player
             ShootBullet();
         }
-        else {
+        else { // Se é controlado pelo player
             PlayerShooterControl();
         }
     }

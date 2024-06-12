@@ -5,14 +5,17 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    // Limites da tela
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private float maxX;
     [SerializeField] private float minX;
     [SerializeField] private float maxZ;
     [SerializeField] private float minZ;
-
+    
+    // Layer de colisão do mouse
     [SerializeField] private LayerMask mouseLayer;
 
+    // Velocidade de movimento
     public float moveSpeed = 8f;
 
     private void HandleMovement() {

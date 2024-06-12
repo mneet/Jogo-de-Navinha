@@ -1,31 +1,50 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 public class MovementComponent : MonoBehaviour
 {
-
+    // Limites da tela
     [SerializeField] private float maxX = 14f;
     [SerializeField] private float minX = -14f;
     [SerializeField] private float maxZ = 7.2f;
     [SerializeField] private float minZ = -7.7f;
 
+    // Velocidade de movimento
     public float movementSpeed = 7f;
+
+    // Flag se deve rotacionar
     [SerializeField] private bool rotate = false;
+    // Velocidade de rotação
     [SerializeField] private float rotateSpeed = 5f;
+    // Eixos que deve rotacionar
     [SerializeField] private Vector3 rotateDirection;
+
+    // ZIGZAG
+    private float invertTimerMax = 1.2f;
+    private float invertTimer = 1.2f;
 
     // Enumerador com possibilidades de direções de movimento
     private enum MovementDirection {
         RIGHT = 0,
         LEFT = 1,
-        DOWN = 2,
-        LENGTH = 3
+        UP = 2,
+        DOWN = 3,
+        LENGTH = 4
     }
     [SerializeField] private MovementDirection movementDirection;
     public Vector2 movementDirectionVector;
+
+    // Padrões de movimentação
+    private enum MovementPatterns {
+        STRAIGHT = 0,
+        ZIGZAG = 1,
+        LENGTH = 2
+    }
+    [SerializeField] private MovementPatterns movementPattern;
 
     // Returna um valor aleatorio do enumerador MovementDirection
     private MovementDirection GetRandomDirection() {
@@ -68,6 +87,12 @@ public class MovementComponent : MonoBehaviour
                 newPosition.x = UnityEngine.Random.Range(minX + 2, maxX - 2);
                 newPosition.y = UnityEngine.Random.Range(maxZ, maxZ + 2);
                 break;
+            case MovementDirection.UP:
+                movementDirectionVector.y = 1;
+                movementDirectionVector.x = UnityEngine.Random.Range(-1f, 0f);
+                newPosition.x = UnityEngine.Random.Range(minX + 2, maxX - 2);
+                newPosition.y = UnityEngine.Random.Range(minZ + 2, minZ - 2);
+                break;
         }
         movementDirectionVector.Normalize();
         
@@ -94,6 +119,28 @@ public class MovementComponent : MonoBehaviour
         transform.position += movDir * movementSpeed * Time.deltaTime;
     }
     
+    // Movimentação em ZigZag
+    private void ZigZagMovement() {
+
+        invertTimer -= Time.deltaTime;
+        Vector3 movDir = new Vector3(movementDirectionVector.x, 0, movementDirectionVector.y);
+        if (invertTimer <= 0) {
+            switch (movementDirection) {
+                case MovementDirection.UP:
+                case MovementDirection.DOWN:
+                    movementDirectionVector.x *= -1f;
+                    break;
+                case MovementDirection.LEFT:
+                case MovementDirection.RIGHT:
+                    movementDirectionVector.y *= -1f;
+                    break;
+            }
+            invertTimer = invertTimerMax;
+        }
+
+        transform.position += movDir * movementSpeed * Time.deltaTime;
+    }
+
     // Checa se objeto ultrapassou os limites da tela
     private void CheckOutOfBorder() {
         bool xLimit = transform.position.x < minX - 12 || transform.position.x > maxX + 12;
@@ -118,14 +165,24 @@ public class MovementComponent : MonoBehaviour
             }
         }
     }
+    
     private void Awake() {
         // Define posição e direção aleatoria ao iniciar
         RandomizeDirection();
     }
+    
     void Update() {
 
-        // Metodos de movimentação e checagem de limites
-        BasicStraightMovement();
+        // Executa metodo de movimento com base do padrão selecionado
+        switch (movementPattern) {
+            case MovementPatterns.STRAIGHT:
+                BasicStraightMovement();
+                break;
+            case MovementPatterns.ZIGZAG:
+                ZigZagMovement(); 
+                break;
+        }
+        // Checa se o objeto saiu dos limites da tela
         CheckOutOfBorder();
 
         // Rotaciona objeto caso ativado

@@ -10,19 +10,21 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager Instance;
+
+    // Pontuação do player
     [SerializeField] private int score = 0;
 
+    // Pools de objetos e inimigos
     public PoolManager EnemyParticlePool;
     public PoolManager SmallAsteroidPool;
     public PoolManager MediumAsteroidPool;
     public PoolManager BigAsteroidPool;
     public PoolManager ShooterPool;
 
-
+    // Lista de powerups a serem dropados
     [SerializeField] private List<GameObject> powerUpList;
 
-    [SerializeField] private int levelCap = 10;
-
+    // Variaveis de controle da UI e HUD
     [SerializeField] private GameObject endGameUI;
     [SerializeField] private GameObject gameHUD;
     [SerializeField] private TMP_Text endScoreText;
@@ -30,17 +32,23 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Slider hpBar;
     [SerializeField] private GameObject victoryText;
     [SerializeField] private GameObject lossText;
+
+    // Flag de fim de jogo
     public bool gameEnded = false;
 
+    // Spawna um powerup quando chamada
     public void SpawnPowerUp(Vector3 position) {
+        // EScolhe um powerup da lista e o instancia
         GameObject powerUp = powerUpList[Random.Range(0, powerUpList.Count)];
-
         Instantiate(powerUp, position, Quaternion.identity);
     }
+   
+    // Retorna um objeto aleatorio da pool do tipo de inimigo fornecido
     public GameObject GetRandomEnemy(WaveManager.AsteroidTypes asteroidType) {
 
         GameObject obj = null;
 
+        // Ecolhe pool com base no tipo de inimigo
         switch (asteroidType) {
             case WaveManager.AsteroidTypes.SMALL: 
                 obj = SmallAsteroidPool.GetPoolObject(); 
@@ -58,20 +66,32 @@ public class GameManager : MonoBehaviour
 
         return obj;
     }
+
+    // Instancia particulas de hit dos inimigos
     public void PlayEnemieHitParticle(Vector3 position) {
+        // Retorna sistema de particulas da pool
         GameObject ptSys = EnemyParticlePool.GetPoolObject();
         ptSys.SetActive(true);
+
+        // Seta posição das particulas e da play
         ptSys.transform.position = position;
         ptSys.GetComponent<ParticleSystem>().Play();
     }   
+    
+    // Marca um ponto para o player
     public void ScorePoint(int point) {
         if (!gameEnded) {
             score += point;
             scoreText.text = $"Pontos: {score}";
         }
     }
+
+    // Atualiza Barra de vida da UI
     public void UpdateHealthUI(int health) {
+        // Transforma valor fornecido em porcentagem
         hpBar.value = ((float)health / 100f) * 10f;
+
+        // Se menor que 0, ativa tela de derrota
         if (health <= 0) {
             endGameUI.SetActive(true);
             endScoreText.text = $"Pontuação: {score}";
@@ -81,6 +101,8 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0f;
         }
     }
+   
+    // Ativa tela de vitoria
     public void EndGameVictory() {
         gameHUD.SetActive(false);
         gameEnded = true;
@@ -89,6 +111,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         endScoreText.text = $"Pontuação: {score}";
     }
+    
+    // Reinicia jogo
     public void RestartGame() {
         Debug.Log("Restarting game");
         Time.timeScale = 1f;

@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3628656597238826472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8553132381564385127}
+  - component: {fileID: 5054144469801141175}
+  - component: {fileID: 7419374301081847848}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8553132381564385127
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3628656597238826472}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5054144469801141175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3628656597238826472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40fddf4aa20bb81478b2847d04f03645, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  EnemyParticlePool: {fileID: 0}
+  SmallAsteroidPool: {fileID: 0}
+  MediumAsteroidPool: {fileID: 0}
+  BigAsteroidPool: {fileID: 0}
+  ShooterPool: {fileID: 0}
+  powerUpList:
+  - {fileID: 6746298125663135004, guid: 0ca4a31a02edeb1409b32d505a4b043b, type: 3}
+  - {fileID: 6746298125663135004, guid: f9cfdfde0cf910d4d9dc978968cbd596, type: 3}
+  - {fileID: 6746298125663135004, guid: 951e27bc3868c6d408a0f36cddd4ce77, type: 3}
+  - {fileID: 6746298125663135004, guid: d0087263d5b139846947c53f2e6fc643, type: 3}
+  levelCap: 10
+  endGameUI: {fileID: 0}
+  gameHUD: {fileID: 0}
+  endScoreText: {fileID: 0}
+  scoreText: {fileID: 0}
+  hpBar: {fileID: 0}
+  victoryText: {fileID: 0}
+  lossText: {fileID: 0}
+  gameEnded: 0
+--- !u!114 &7419374301081847848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3628656597238826472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 664a4f29915fcb7448fc94c478e66686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerStartDelayMax: 2
+  timerStartDelay: 2
+  waveCount: 0
+  waveMobAmount: 030000000500000007000000090000000b000000
+  EnemiesList:
+  - {fileID: 6798739349342710964, guid: 832266b5d2514ff4a908ae2a21581ff4, type: 3}
+  - {fileID: 6798739349342710964, guid: eb5a4cbfef689b64598bc3382ab3ee4e, type: 3}
+  - {fileID: 6798739349342710964, guid: 6977da8c35d6b224dba073da68cb0701, type: 3}
+  - {fileID: 6798739349342710964, guid: 2941585d6fe57a743aecdb4ae8720ff9, type: 3}

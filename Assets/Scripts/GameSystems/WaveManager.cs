@@ -6,21 +6,27 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour {
+
     // System
     public static WaveManager Instance;
 
+    // Timer entre cada wave
     [SerializeField] private float timerStartDelayMax = 1f;
     [SerializeField] private float timerStartDelay = 1f;
     private bool waveStartDelay = true;
+
+    // Contador de waves
     public int waveCount = 0;
 
+    // QUantidade de mobs por wave, cada indice indica quantos mobs serão spawnado de acordo com o contador
     public int[] waveMobAmount;
 
     // Generation variables
     [SerializeField] private List<GameObject> EnemiesList;
 
-    // Wave
+    // Variáveis de Wave
 
+    // Tipos de asteroides
     public enum AsteroidTypes {
         SMALL = 0,
         MEDIUM = 1,
@@ -29,40 +35,51 @@ public class WaveManager : MonoBehaviour {
         LENGTH = 4
     }
 
+    // Struct que armazena informações da Wave
     public struct Wave {
-        public bool waveSpawned;
-        public List<AsteroidTypes> mobList;
-        public List<GameObject> mobObjList;
-        public bool waveRunning;
+        public bool waveSpawned;            // Se a wave foi spawnada
+        public List<AsteroidTypes> mobList; // Lista de mobs que deve ser spawnado
+        public List<GameObject> mobObjList; // Referencias aos objetos spawnados para checagem da wave
+        public bool waveRunning;            // Flag se a wave esta em progresso
 
-        public void InitVariables() {
+        public void InitVariables() {       // Inicia variaveis do struct
             mobList = new List<AsteroidTypes>();
             waveSpawned = false;
             waveRunning = true;
         }
     }
+    
+    // Wave atual
     public Wave currentWave;
 
     #region Generation Methods
 
+    // Algumas partes do código estão em inglês, porque usei meus sistemas do TI como base e o projeto do TI foi programado todo em inglês
+
     // Generates a wave with mobs that run over the map
     private Wave WaveGenerator() {
+
+        // Inicia struct de wave
         Wave wave = new Wave();
         wave.InitVariables();
         
-        for (var i = 0; i < waveMobAmount[waveCount]; i++) {
-            
+        // Popula lista de mobs da wave com tipos de asteroid
+        for (var i = 0; i < waveMobAmount[waveCount]; i++) {            
             AsteroidTypes mob = (AsteroidTypes)UnityEngine.Random.Range(0, (int)AsteroidTypes.LENGTH);
             wave.mobList.Add(mob);
         }
+
+        // Aumenta contador da wave
         waveCount++;
+        waveCount = Mathf.Clamp(waveCount, 0, waveMobAmount.Length - 1);
+
+        // Retorna struct da wave gerada
         return wave;
     }
 
+    // Retorna um valor aleatorio de uma lista fornecida
     private GameObject PickRandomList(List<GameObject> list) {
-
         int randomIndex = Mathf.Max(UnityEngine.Random.Range(0, list.Count()));
-        Debug.Log(randomIndex);
         return list[randomIndex];
     }
 
@@ -70,26 +87,41 @@ public class WaveManager : MonoBehaviour {
 
     #region Gameplay Management Methods
 
-    // Control Wave Spawn
+    // Spawna os mobs da wave
     private void SpawnWave() {
+
+        // Inicia lista de objetos
         List<GameObject> mobObjList = new List<GameObject>();
+
+        // Checa se wave atual já foi spawnada
         if (!currentWave.waveSpawned) {
             currentWave.waveSpawned = true;
+            // Inicia spawn da wave
             for (var i = 0; i < currentWave.mobList.Count(); i++) {
+
+                // Pega um mob da pool de mobs correspondente
                 GameObject mob = GameManager.Instance.GetRandomEnemy(currentWave.mobList[i]);
+
+                // Ativa objeto do mob e randomiza direção do mesmo
                 mob.SetActive(true);
                 mob.GetComponent<MovementComponent>().RandomizeDirection();
+
+                // Adiciona o mob na lista da wave
                 mobObjList.Add(mob);
             }
         }
+
+        // Seta nova lista de mobs spawnados no struct da wave
         currentWave.mobObjList = mobObjList;
     }
 
-    // Check if given list contains the given mob and remove it from the list, returns false if the list is empty
+    // Checa se o mob fornecido pertence a lista da wave, caso sim remova-o da lista
+    // Função chamada quando mob é destruido
     public void CheckWaveList(GameObject mob) {
         if (currentWave.mobObjList.Contains(mob)) {
             currentWave.mobObjList.Remove(mob);
 
+            // Caso lista d emobs seja menor ou igual a 0, indica que a wave acabou
             if (currentWave.mobObjList.Count() <= 0) {
                 currentWave.waveRunning = false;
             }
@@ -97,21 +129,25 @@ public class WaveManager : MonoBehaviour {
     }
     #endregion 
 
+    // Controle de wave
     private void WaveControl() {
+        // Se a wave esta em progresso
         if (currentWave.waveRunning) {
+            // Se ainda não foi spawnada, chama o metodo de spawn
             if (!currentWave.waveSpawned) {
                 SpawnWave();
             }
         }
-        else {
-            if (waveCount < 4) { 
-                timerStartDelay -= Time.deltaTime;
-                if (timerStartDelay <= 0) {
+        else { // Caso não esteja em progresso
+            if (waveCount < 4) { // Caso seja menor que o limite de waves
+                timerStartDelay -= Time.deltaTime; // Diminui timer de delay entre waves
+                if (timerStartDelay <= 0) { 
+                    // Gera nova wave e reseta timer de delay
                     currentWave = WaveGenerator();
                     timerStartDelay = timerStartDelayMax;
                 }
             }
-            else {
+            else { // Caso o limite de waves seja atingido, chama tela de vitoria
                 GameManager.Instance.EndGameVictory();
             }
         }
@@ -127,9 +163,12 @@ public class WaveManager : MonoBehaviour {
     }
 
     private void Start() {
+        // Gera wave inicial
         currentWave = WaveGenerator();
     }
+   
     private void Update() {
+        // Metodo de controle de waves
         WaveControl();
     }
 }

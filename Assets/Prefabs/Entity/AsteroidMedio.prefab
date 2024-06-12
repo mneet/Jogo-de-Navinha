@@ -49,7 +49,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0103520d813df524da4589c53760304f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scorePoints: 0
   asteroidToSpawn: 0
   asteroidAmount: 3
 --- !u!114 &2297072680309609210
@@ -66,6 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 2
   healthMax: 10
+  scorePoints: 2
   immortal: 0
   hitParticles: {fileID: 557219510723164364, guid: 6974c18403e5a6f4cadf41078fafb74f, type: 3}
 --- !u!114 &7898045923670704295
@@ -90,6 +90,7 @@ MonoBehaviour:
   rotateDirection: {x: 0, y: 1, z: 0}
   movementDirection: 0
   movementDirectionVector: {x: 0, y: 0}
+  movementPattern: 0
 --- !u!54 &978649450142674192
 Rigidbody:
   m_ObjectHideFlags: 0
