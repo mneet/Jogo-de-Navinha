@@ -757,7 +757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3378919239234669143, guid: c3954dd8916462749951675e76b6c06b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -3.35
       objectReference: {fileID: 0}
     - target: {fileID: 3378919239234669143, guid: c3954dd8916462749951675e76b6c06b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -861,6 +861,10 @@ PrefabInstance:
       propertyPath: MediumAsteroidPool
       value: 
       objectReference: {fileID: 928122112}
+    - target: {fileID: 7419374301081847848, guid: ab40814d19755884399ff85ab13710dc, type: 3}
+      propertyPath: Boss
+      value: 
+      objectReference: {fileID: 460912213041598950, guid: 67fab3836bff06e499ac3bfabf354f4c, type: 3}
     - target: {fileID: 8553132381564385127, guid: ab40814d19755884399ff85ab13710dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

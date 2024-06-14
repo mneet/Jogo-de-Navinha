@@ -17,6 +17,7 @@ public class ShooterComponent : MonoBehaviour {
     // Timers e cooldowns
     public float fireRate = 0.5f;
     private float fireCooldown = 0f;
+    public bool activateShoot = true;
     
     // Nível do projetil
     public int bulletLevel  = 1;
@@ -91,7 +92,7 @@ public class ShooterComponent : MonoBehaviour {
         if (fireCooldown > 0) fireCooldown -= Time.deltaTime;
 
         // Chama metodos de controle de tiro 
-        if (!playerControlled) { // Se não é controlado pelo player
+        if (!playerControlled && activateShoot) { // Se não é controlado pelo player
             ShootBullet();
         }
         else { // Se é controlado pelo player

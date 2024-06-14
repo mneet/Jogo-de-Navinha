@@ -19,7 +19,6 @@ public class PowerUP : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
-            Debug.Log("destroy");
             switch (power) {
                 case Powers.HEAL: Heal(other.gameObject); break;
                 case Powers.FIRE: UpgradeFire(other.gameObject); break;

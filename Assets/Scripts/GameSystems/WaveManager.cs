@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using static WaveManager;
 
 public class WaveManager : MonoBehaviour {
 
@@ -23,7 +24,7 @@ public class WaveManager : MonoBehaviour {
 
     // Generation variables
     [SerializeField] private List<GameObject> EnemiesList;
-
+    [SerializeField] private GameObject bossPreFab;
     // Variáveis de Wave
 
     // Tipos de asteroides
@@ -32,7 +33,8 @@ public class WaveManager : MonoBehaviour {
         MEDIUM = 1,
         BIG = 2,
         SHOOTER = 3,
-        LENGTH = 4
+        LENGTH = 4,
+        BOSS = 5
     }
 
     // Struct que armazena informações da Wave
@@ -44,6 +46,7 @@ public class WaveManager : MonoBehaviour {
 
         public void InitVariables() {       // Inicia variaveis do struct
             mobList = new List<AsteroidTypes>();
+            mobObjList = new List<GameObject>();
             waveSpawned = false;
             waveRunning = true;
         }
@@ -104,7 +107,10 @@ public class WaveManager : MonoBehaviour {
 
                 // Ativa objeto do mob e randomiza direção do mesmo
                 mob.SetActive(true);
-                mob.GetComponent<MovementComponent>().RandomizeDirection();
+                MovementComponent movementComponent = mob.GetComponent<MovementComponent>();
+                if (movementComponent != null) {
+                    movementComponent.RandomizeDirection();
+                }
 
                 // Adiciona o mob na lista da wave
                 mobObjList.Add(mob);
@@ -148,7 +154,22 @@ public class WaveManager : MonoBehaviour {
                 }
             }
             else { // Caso o limite de waves seja atingido, chama tela de vitoria
-                GameManager.Instance.EndGameVictory();
+                if (waveCount == 4) {
+
+                    // Iniciando wave do boss
+                    currentWave = new Wave();
+                    currentWave.InitVariables();
+                    currentWave.mobList.Add(AsteroidTypes.BOSS);
+
+                    GameObject boss = Instantiate(bossPreFab, new Vector3(0f, 0f, 10f), Quaternion.identity);
+                    currentWave.mobObjList.Add(boss);
+                    currentWave.waveSpawned = true;
+
+                    waveCount++;
+                }
+                else {
+                    GameManager.Instance.EndGameVictory();
+                }
             }
         }
     }

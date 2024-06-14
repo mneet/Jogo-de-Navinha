@@ -60,7 +60,9 @@ public class HealthComponent : MonoBehaviour
                 Vector3 pos = transform.position;
                 if (dice < 20) gameManager.SpawnPowerUp(pos);
 
-                gameObject.GetComponent<AsteroidComponent>().DestroyAsteroid();
+                AsteroidComponent asteroid =  gameObject.GetComponent<AsteroidComponent>();
+                if (asteroid != null) asteroid.DestroyAsteroid();
+
                 WaveManager.Instance.CheckWaveList(gameObject);
                 health = healthMax;
                 gameObject.SetActive(false);
@@ -82,6 +84,7 @@ public class HealthComponent : MonoBehaviour
     // Recebe cura
     public void TakeHeal(float heal) {
         health += heal;
+        health = Mathf.Min(health, healthMax);
 
         // CAso seja o player, atualiza interface
         if (isPlayer) gameManager.UpdateHealthUI((int)health);
@@ -100,9 +103,6 @@ public class HealthComponent : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         isPlayer = CompareTag("Player") || CompareTag("PlayerShield");
         healthMax = health;
-
-
-        Debug.Log("Object created");
     }
 
     private void Start()

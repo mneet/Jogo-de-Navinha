@@ -28,7 +28,7 @@ public class MovementComponent : MonoBehaviour
     private float invertTimer = 1.2f;
 
     // Enumerador com possibilidades de direções de movimento
-    private enum MovementDirection {
+    public enum MovementDirection {
         RIGHT = 0,
         LEFT = 1,
         UP = 2,

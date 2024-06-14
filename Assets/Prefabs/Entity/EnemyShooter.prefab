@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 6798739349342710964}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.22, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -55,6 +55,7 @@ MonoBehaviour:
   playerControlled: 0
   bulletPreFab: {fileID: 4238151249580601340, guid: 30dc627aa8346dc46a0a98a5f0448fde, type: 3}
   fireRate: 0.8
+  activateShoot: 1
   bulletLevel: 1
 --- !u!114 &8740274409285399577
 MonoBehaviour:

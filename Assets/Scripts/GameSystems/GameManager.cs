@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int score = 0;
 
     // Pools de objetos e inimigos
+    [Header("Particulas e Pools")]
     public PoolManager EnemyParticlePool;
     public PoolManager SmallAsteroidPool;
     public PoolManager MediumAsteroidPool;
@@ -22,9 +23,12 @@ public class GameManager : MonoBehaviour
     public PoolManager ShooterPool;
 
     // Lista de powerups a serem dropados
+    [Header("GameObjects")]
     [SerializeField] private List<GameObject> powerUpList;
+    [SerializeField] private GameObject bossPreFab;
 
     // Variaveis de controle da UI e HUD
+    [Header("UI e HUD")]
     [SerializeField] private GameObject endGameUI;
     [SerializeField] private GameObject gameHUD;
     [SerializeField] private TMP_Text endScoreText;
@@ -61,6 +65,9 @@ public class GameManager : MonoBehaviour
                 break;
             case WaveManager.AsteroidTypes.SHOOTER:
                 obj = ShooterPool.GetPoolObject();
+                break;
+            case WaveManager.AsteroidTypes.BOSS:
+                obj = bossPreFab;
                 break;
         }
 
