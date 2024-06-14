@@ -834,6 +834,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1870665822}
     - target: {fileID: 5054144469801141175, guid: ab40814d19755884399ff85ab13710dc, type: 3}
+      propertyPath: bossPreFab
+      value: 
+      objectReference: {fileID: 460912213041598950, guid: 67fab3836bff06e499ac3bfabf354f4c, type: 3}
+    - target: {fileID: 5054144469801141175, guid: ab40814d19755884399ff85ab13710dc, type: 3}
       propertyPath: ShooterPool
       value: 
       objectReference: {fileID: 814569100}
@@ -865,6 +869,30 @@ PrefabInstance:
       propertyPath: Boss
       value: 
       objectReference: {fileID: 460912213041598950, guid: 67fab3836bff06e499ac3bfabf354f4c, type: 3}
+    - target: {fileID: 7419374301081847848, guid: ab40814d19755884399ff85ab13710dc, type: 3}
+      propertyPath: bossPreFab
+      value: 
+      objectReference: {fileID: 460912213041598950, guid: 67fab3836bff06e499ac3bfabf354f4c, type: 3}
+    - target: {fileID: 7419374301081847848, guid: ab40814d19755884399ff85ab13710dc, type: 3}
+      propertyPath: waveMobAmount.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7419374301081847848, guid: ab40814d19755884399ff85ab13710dc, type: 3}
+      propertyPath: waveMobAmount.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7419374301081847848, guid: ab40814d19755884399ff85ab13710dc, type: 3}
+      propertyPath: waveMobAmount.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7419374301081847848, guid: ab40814d19755884399ff85ab13710dc, type: 3}
+      propertyPath: waveMobAmount.Array.data[3]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7419374301081847848, guid: ab40814d19755884399ff85ab13710dc, type: 3}
+      propertyPath: waveMobAmount.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8553132381564385127, guid: ab40814d19755884399ff85ab13710dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
