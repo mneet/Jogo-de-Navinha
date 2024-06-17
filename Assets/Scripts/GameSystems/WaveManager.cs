@@ -72,10 +72,6 @@ public class WaveManager : MonoBehaviour {
             wave.mobList.Add(mob);
         }
 
-        // Aumenta contador da wave
-        waveCount++;
-        waveCount = Mathf.Clamp(waveCount, 0, waveMobAmount.Length - 1);
-
         // Retorna struct da wave gerada
         return wave;
     }
@@ -147,21 +143,26 @@ public class WaveManager : MonoBehaviour {
         else { // Caso não esteja em progresso
             if (waveCount < 4) { // Caso seja menor que o limite de waves
                 timerStartDelay -= Time.deltaTime; // Diminui timer de delay entre waves
-                if (timerStartDelay <= 0) { 
+                if (timerStartDelay <= 0) {
+
+                    // Aumenta contador da wave
+                    waveCount++;
+                    waveCount = Mathf.Clamp(waveCount, 0, waveMobAmount.Length - 1);
+
                     // Gera nova wave e reseta timer de delay
                     currentWave = WaveGenerator();
                     timerStartDelay = timerStartDelayMax;
                 }
             }
             else { // Caso o limite de waves seja atingido, chama tela de vitoria
-                if (waveCount == 4) {
+                if (waveCount >= 4) {
 
                     // Iniciando wave do boss
                     currentWave = new Wave();
                     currentWave.InitVariables();
                     currentWave.mobList.Add(AsteroidTypes.BOSS);
 
-                    GameObject boss = Instantiate(bossPreFab, new Vector3(0f, 0f, 10f), Quaternion.identity);
+                    GameObject boss = Instantiate(bossPreFab, new Vector3(0f, 0f, 10f), Quaternion.Euler(new Vector3(0f,180f,0f)));
                     currentWave.mobObjList.Add(boss);
                     currentWave.waveSpawned = true;
 
@@ -171,6 +172,19 @@ public class WaveManager : MonoBehaviour {
                     GameManager.Instance.EndGameVictory();
                 }
             }
+        }
+    }
+
+    // DEBUG
+    private void DebugSkipToBoss()
+    {
+        if (Input.GetKeyDown(KeyCode.F5)) { 
+            for (var i = 0; i < currentWave.mobObjList.Count; i++)
+            {
+                currentWave.mobObjList[i].SetActive(false);
+            }
+            waveCount = 5;
+            currentWave.waveRunning = false;
         }
     }
 
@@ -191,5 +205,6 @@ public class WaveManager : MonoBehaviour {
     private void Update() {
         // Metodo de controle de waves
         WaveControl();
+        DebugSkipToBoss();
     }
 }

@@ -16,7 +16,7 @@ public class HealEnemy : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag(gameObject.tag)) {
+        if (other.CompareTag(gameObject.tag) && other.name != gameObject.name) {
             other.GetComponent<HealthComponent>().TakeHeal(heal);
             Destroy(gameObject);
         }

@@ -10,10 +10,10 @@ public class BossMachine : MonoBehaviour
     
     public enum BossStates {
         IDLE,
-        SIDE_TO_SIDE_SHOOTING,
-        HEAL,
+        SIDE_TO_SIDE_SHOOTING,   
         SPINNING_N_SHOOTING,
-        FOUR_CORNERS
+        FOUR_CORNERS,
+        HEAL
     }
     [Header("State")]
     public BossStates state = BossStates.IDLE;
@@ -83,6 +83,12 @@ public class BossMachine : MonoBehaviour
     private void slideToPosition(Vector3 destPos)
     {
         transform.position = Vector3.MoveTowards(transform.position, destPos, movementSpeed * Time.deltaTime);
+
+    }
+
+    private void rotateToPosition(Vector3 destPos)
+    {
+        transform.forward = Vector3.MoveTowards(transform.forward, -(transform.position - destPos), 1 * Time.deltaTime);
 
     }
 
@@ -256,8 +262,8 @@ public class BossMachine : MonoBehaviour
     private void fourCornersState() {
         if (!stateSet) {
             slideToPosition(topCenterPosition);
-
-            if (transform.position == topCenterPosition) {
+            SpinBossPart bossRotator = gameObject.GetComponent<SpinBossPart>();
+            if (transform.position == topCenterPosition && transform.rotation == bossRotator.defaultRotation) {
                 toggleStopSpinParts();
                 moveDirVec = new Vector3(1, 0, 0);
                 toggleShooting(true);
@@ -267,6 +273,10 @@ public class BossMachine : MonoBehaviour
         else {
             // Aplicando movimento
             transform.position += moveDirVec * (movementSpeed / 2) * Time.deltaTime;
+            Vector3 clampVector = transform.position;
+            clampVector.x = Mathf.Clamp(clampVector.x, minX, maxX);
+            clampVector.z = Mathf.Clamp(clampVector.z, minZ, maxZ);
+            transform.position = clampVector;
 
             if (transform.position.x >= maxX) {
                 moveDirVec = new Vector3(0,0,-1);
@@ -293,13 +303,15 @@ public class BossMachine : MonoBehaviour
                     }
                     break;
                 case MovementComponent.MovementDirection.UP:
-                    if (transform.position.z >= maxZ + 0.1f) {
+                    if (transform.position.z >= maxZ) {
                         moveDirVec = new Vector3(1, 0, 0);
                         direction = MovementComponent.MovementDirection.RIGHT;
                     }
                     break;
             }
-            transform.LookAt(new Vector3(0f,0f,0f));
+            
+            //transform.LookAt(new Vector3(0f, 0f, 0f));
+            rotateToPosition(new Vector3(0f, 0f, 0f));
 
             // Condição de troca de estado
             stateTimer -= Time.deltaTime;

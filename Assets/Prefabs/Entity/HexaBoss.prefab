@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222bafcd991feb04e88662d3acd0d582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
+  state: 3
   stateTimer: 10
   healSpawnTimer: 1
   healthBar: {fileID: 5743622617539672755}
@@ -80,7 +80,7 @@ MonoBehaviour:
   maxX: 9.2
   minX: -9.8
   maxZ: 1.1
-  minZ: -2.1
+  minZ: -1.8
   moveDirVec: {x: 1, y: 0, z: 0}
   direction: 0
   centerPosition: {x: 0, y: 0, z: 0}
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eddfc90587ac05944ab0e87762437422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 15
   healthMax: 10
   scorePoints: 1
   immortal: 0
@@ -121,10 +121,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlled: 0
-  bulletPreFab: {fileID: 4238151249580601340, guid: 30dc627aa8346dc46a0a98a5f0448fde, type: 3}
-  fireRate: 0.6
+  bulletPreFab: {fileID: 5395158556580339885, guid: 5d47b57fa749f11499e43eb747f10847, type: 3}
+  fireRate: 0.8
   activateShoot: 0
-  bulletLevel: 1
+  bulletLevel: 2
 --- !u!54 &2369166487681886439
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eddfc90587ac05944ab0e87762437422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 15
   healthMax: 10
   scorePoints: 1
   immortal: 0
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerControlled: 0
   bulletPreFab: {fileID: 4238151249580601340, guid: 30dc627aa8346dc46a0a98a5f0448fde, type: 3}
-  fireRate: 0.5
+  fireRate: 0.7
   activateShoot: 0
   bulletLevel: 1
 --- !u!54 &4445984544944230111
@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eddfc90587ac05944ab0e87762437422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 15
   healthMax: 10
   scorePoints: 1
   immortal: 0
@@ -492,7 +492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eddfc90587ac05944ab0e87762437422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 20
   healthMax: 10
   scorePoints: 1
   immortal: 0
@@ -576,7 +576,7 @@ Transform:
   m_GameObject: {fileID: 8064578466906592552}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: -2.5}
+  m_LocalPosition: {x: -4.36, y: 0, z: -2.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -614,7 +614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerControlled: 0
   bulletPreFab: {fileID: 4238151249580601340, guid: 30dc627aa8346dc46a0a98a5f0448fde, type: 3}
-  fireRate: 0.7
+  fireRate: 0.9
   activateShoot: 0
   bulletLevel: 1
 --- !u!114 &4218035129439495614
@@ -629,7 +629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eddfc90587ac05944ab0e87762437422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 20
   healthMax: 10
   scorePoints: 1
   immortal: 0

@@ -6,7 +6,7 @@ public class SpinBossPart : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed;
     [SerializeField] private Vector3 rotationAxis;
-    [SerializeField] private Quaternion defaultRotation;
+    public Quaternion defaultRotation;
     public bool rotateFlag;
     public bool stopRotation = false;
 
