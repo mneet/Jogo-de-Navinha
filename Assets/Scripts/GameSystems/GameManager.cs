@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameHUD;
     [SerializeField] private TMP_Text endScoreText;
     [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text waveText;
     [SerializeField] private Slider hpBar;
     [SerializeField] private GameObject victoryText;
     [SerializeField] private GameObject lossText;
@@ -92,6 +93,14 @@ public class GameManager : MonoBehaviour
             scoreText.text = $"Pontos: {score}";
         }
     }
+
+    // Atualiza contador de ondas
+    public void WaveCount(int wave) {
+        if (!gameEnded) {
+            waveText.text = $"Waves Derrotadas: {wave}";
+        }
+    }
+
 
     // Atualiza Barra de vida da UI
     public void UpdateHealthUI(int health) {

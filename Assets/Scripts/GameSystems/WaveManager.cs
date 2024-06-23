@@ -126,6 +126,11 @@ public class WaveManager : MonoBehaviour {
             // Caso lista d emobs seja menor ou igual a 0, indica que a wave acabou
             if (currentWave.mobObjList.Count() <= 0) {
                 currentWave.waveRunning = false;
+
+                // Aumenta contador da wave
+                waveCount++;
+                waveCount = Mathf.Clamp(waveCount, 0, 5);
+                GameManager.Instance.WaveCount(waveCount);
             }
         }
     }
@@ -144,18 +149,13 @@ public class WaveManager : MonoBehaviour {
             if (waveCount < 4) { // Caso seja menor que o limite de waves
                 timerStartDelay -= Time.deltaTime; // Diminui timer de delay entre waves
                 if (timerStartDelay <= 0) {
-
-                    // Aumenta contador da wave
-                    waveCount++;
-                    waveCount = Mathf.Clamp(waveCount, 0, waveMobAmount.Length - 1);
-
                     // Gera nova wave e reseta timer de delay
                     currentWave = WaveGenerator();
                     timerStartDelay = timerStartDelayMax;
                 }
             }
             else { // Caso o limite de waves seja atingido, chama tela de vitoria
-                if (waveCount >= 4) {
+                if (waveCount == 4) {
 
                     // Iniciando wave do boss
                     currentWave = new Wave();
@@ -166,7 +166,14 @@ public class WaveManager : MonoBehaviour {
                     currentWave.mobObjList.Add(boss);
                     currentWave.waveSpawned = true;
 
-                    waveCount++;
+                    //waveCount++;
+                    //GameManager.Instance.WaveCount(waveCount);
+
+                    GameObject player = GameObject.Find("Player");
+                    if (player != null) {
+                        HealthComponent playerHealth = player.GetComponent<HealthComponent>();
+                        playerHealth.TakeHeal(playerHealth.healthMax);
+                    }
                 }
                 else {
                     GameManager.Instance.EndGameVictory();
@@ -178,12 +185,15 @@ public class WaveManager : MonoBehaviour {
     // DEBUG
     private void DebugSkipToBoss()
     {
-        if (Input.GetKeyDown(KeyCode.F5)) { 
+        // Input da tecla F5
+        if (Input.GetKeyDown(KeyCode.F5)) {
+            // Loop percorrendo os mobs spawnados e desativando cada um
             for (var i = 0; i < currentWave.mobObjList.Count; i++)
             {
                 currentWave.mobObjList[i].SetActive(false);
             }
-            waveCount = 5;
+            // Seta contador de wave para a wave do boss
+            waveCount = 4;
             currentWave.waveRunning = false;
         }
     }

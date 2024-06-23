@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -246,6 +246,17 @@ MonoBehaviour:
   followTarget: {fileID: 0}
   move: 0
   rotate: 0
+--- !u!114 &186035711 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7473768097487809485, guid: 586d5de9667ca8c4cb997ecd55c17c19, type: 3}
+  m_PrefabInstance: {fileID: 5784789123983230161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &257092214 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8099276652298794464, guid: 243e6868938c0d34189b58e465c50e89, type: 3}
@@ -650,6 +661,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 939245350}
+    - target: {fileID: 3593683436579813838, guid: 243e6868938c0d34189b58e465c50e89, type: 3}
+      propertyPath: m_text
+      value: "A INVAS\xC3O HEXAGONAL FOI PARADA E O TRAIDOR DERROTADO! "
+      objectReference: {fileID: 0}
+    - target: {fileID: 5895424140948018725, guid: 243e6868938c0d34189b58e465c50e89, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6190628908384715463, guid: 243e6868938c0d34189b58e465c50e89, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -730,9 +749,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6811295988180701039, guid: 243e6868938c0d34189b58e465c50e89, type: 3}
+      propertyPath: m_text
+      value: "OS TRI\xC2NGULOS FORAM CONQUISTADOS PELO EX\xC9RCITO HEXAGONAL\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811295988180701039, guid: 243e6868938c0d34189b58e465c50e89, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.10410547
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811295988180701039, guid: 243e6868938c0d34189b58e465c50e89, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811295988180701039, guid: 243e6868938c0d34189b58e465c50e89, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811295988180701039, guid: 243e6868938c0d34189b58e465c50e89, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4279959807
+      objectReference: {fileID: 0}
     - target: {fileID: 7362020861403696920, guid: 243e6868938c0d34189b58e465c50e89, type: 3}
       propertyPath: m_Name
       value: EndGameUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362020861403696920, guid: 243e6868938c0d34189b58e465c50e89, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7428747798288827351, guid: 243e6868938c0d34189b58e465c50e89, type: 3}
+      propertyPath: m_text
+      value: 'PONTOS: 0 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099276652298794464, guid: 243e6868938c0d34189b58e465c50e89, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -826,6 +877,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2059604840}
     - target: {fileID: 5054144469801141175, guid: ab40814d19755884399ff85ab13710dc, type: 3}
+      propertyPath: waveText
+      value: 
+      objectReference: {fileID: 186035711}
+    - target: {fileID: 5054144469801141175, guid: ab40814d19755884399ff85ab13710dc, type: 3}
       propertyPath: endGameUI
       value: 
       objectReference: {fileID: 1006172007}
@@ -875,23 +930,23 @@ PrefabInstance:
       objectReference: {fileID: 460912213041598950, guid: 67fab3836bff06e499ac3bfabf354f4c, type: 3}
     - target: {fileID: 7419374301081847848, guid: ab40814d19755884399ff85ab13710dc, type: 3}
       propertyPath: waveMobAmount.Array.data[0]
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7419374301081847848, guid: ab40814d19755884399ff85ab13710dc, type: 3}
       propertyPath: waveMobAmount.Array.data[1]
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7419374301081847848, guid: ab40814d19755884399ff85ab13710dc, type: 3}
       propertyPath: waveMobAmount.Array.data[2]
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7419374301081847848, guid: ab40814d19755884399ff85ab13710dc, type: 3}
       propertyPath: waveMobAmount.Array.data[3]
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7419374301081847848, guid: ab40814d19755884399ff85ab13710dc, type: 3}
       propertyPath: waveMobAmount.Array.data[4]
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8553132381564385127, guid: ab40814d19755884399ff85ab13710dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1126,6 +1181,16 @@ PrefabInstance:
     - target: {fileID: 7401716499325723439, guid: 586d5de9667ca8c4cb997ecd55c17c19, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7473768097487809485, guid: 586d5de9667ca8c4cb997ecd55c17c19, type: 3}
+      propertyPath: m_text
+      value: 'Waves Derrotadas: 0
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7473768097487809485, guid: 586d5de9667ca8c4cb997ecd55c17c19, type: 3}
+      propertyPath: m_margin.z
+      value: -38.297783
       objectReference: {fileID: 0}
     - target: {fileID: 8476555176477211462, guid: 586d5de9667ca8c4cb997ecd55c17c19, type: 3}
       propertyPath: m_AnchoredPosition.y
